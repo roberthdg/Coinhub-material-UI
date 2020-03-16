@@ -1,0 +1,27 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.logo {
+  height: 40px;
+  padding-right: 10px;
+}
+
+.btcIcon {
+  font-size: 22px;
+}
+
+.ethIcon {
+  font-size: 25px;
+}
+
+.calculatorIcon {
+  font-size: 20px;
+}
+
+.settingsIcon {
+  font-size: 20px;
+}
