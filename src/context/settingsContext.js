@@ -8,7 +8,8 @@ export const ContextProvider = props => {
         {
             language: 'ENG',
             theme: 'Light',
-            currency: 'USD'
+            currency: 'USD',
+            currentPage: 'Bitcoin'
         }
     );
 

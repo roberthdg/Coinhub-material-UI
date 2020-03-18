@@ -1,17 +1,29 @@
-import React from 'react';
-import { ContextProvider } from '../context/settingsContext'
-import Main from './Main';
+import React, { useContext } from 'react';
+import { settingsContext } from '../context/settingsContext'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faBtc, faEthereum, faGithub } from '@fortawesome/free-brands-svg-icons'
+import { faBtc, faEthereum, faGithub, faMonero, faViacoin } from '@fortawesome/free-brands-svg-icons'
 import { faCalculator, faSlidersH } from '@fortawesome/free-solid-svg-icons'
+import Main from './Main';
 
-library.add( faBtc, faEthereum, faGithub, faCalculator, faSlidersH )
+library.add( faBtc, faEthereum, faGithub, faCalculator, faSlidersH, faMonero, faViacoin )
 
-function App() {
+const lightTheme = createMuiTheme();
+
+const darkTheme = createMuiTheme({
+  palette: {
+    type: 'dark',
+  },
+});
+
+const App = () => {
+
+  const [settings] = useContext(settingsContext)
+
   return (
-    <ContextProvider>
+    <ThemeProvider theme={settings.theme==='Light'? lightTheme : darkTheme}>
       <Main />
-    </ContextProvider>
+    </ThemeProvider>
   );
 }
 

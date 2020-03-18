@@ -1,28 +1,35 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState, memo } from 'react';
 import { settingsContext } from '../context/settingsContext'
-import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Dashboard from './Dashboard';
 
-const Content = () => {
+const Content = (props) => {
 
-  const [settings, setSettings] = useContext(settingsContext)
+  const [settings] = useContext(settingsContext);
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [data, setData] = useState()
 
-    return(
-        <Typography paragraph>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-        ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-        facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-        gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-        donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-        adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-        Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-        imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-        arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-        donec massa sapien faucibus et molestie ac.
+  // useEffect(() => {
+  //   fetch(`https://min-api.cryptocompare.com/data/v2/histoday?fsym=${props.coin}&tsym=${settings.currency}&limit=10&api_key=${process.env.REACT_APP_API_KEY}`)
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setData(data.Data.Data); 
+  //       setIsLoaded(true);
+  //     })
+  //     .catch(error => setIsLoaded(false))  
+  // }, [props.coin, settings.currency, setIsLoaded])
 
-        <button onClick={() => { settings.theme==='Light'? setSettings({theme:'Dark'}) : setSettings({theme:'Light'})}}> TOOGLEEE </button>
+  useEffect(() => {
+    setData([9100, 8800, 8760, 6000, 5400, 4893, 5200])
+    setIsLoaded(true)
+  }, [])
 
-      </Typography>
-    )
+  return(
+    <main className={props.classes.content}>
+      <div className={props.classes.toolbar} />
+      {isLoaded? <Dashboard classes={props.classes}/> : <CircularProgress style={{color:'rgb(52,183,166)', marginLeft:'20vw', marginTop: '10vh'}} size='80px'/>}
+    </main>
+  )
 }
 
 export default Content
