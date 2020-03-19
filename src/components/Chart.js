@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { settingsContext } from '../context/settingsContext'
 import { useTheme } from '@material-ui/core/styles';
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 import Typography from '@material-ui/core/Typography';
 
-export default function Chart(props) {
 
+export default function Chart(props) {
+  const [settings] = useContext(settingsContext)
+  let title = settings.languageData.chart.label[settings.language]
   const theme = useTheme();
-  const chartData = props.data.map(price => ({time: '', amount: price}))
+  const chartData = props.data.map(price => ({time: '', amount: price.close}))
 
   return (
     <>
-      <Typography component="h2" variant="h6" style={{color:'rgb(52,183,166)'}} gutterBottom> This week </Typography>
+      <Typography component="h2" variant="h6" style={{color:'rgb(52,183,166)'}} gutterBottom> {title} </Typography>
       <ResponsiveContainer>
         <LineChart
           data={chartData}

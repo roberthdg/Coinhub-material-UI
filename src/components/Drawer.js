@@ -14,7 +14,9 @@ import Link from '@material-ui/core/Link';
 
 const DrawerMenu = props => {  
 
-    const [settings, setSettings] = useContext(settingsContext)
+    const [settings, setSettings] = useContext(settingsContext);
+    let textData = settings.languageData.drawer;
+    let language = settings.language
 
     function setCurrentPage(page) {
         settings.currentPage=page;
@@ -63,7 +65,7 @@ const DrawerMenu = props => {
                     <ListItemIcon key='Settings' style={ settings.currentPage==='Settings'? {color:'rgb(52,183,166)'} : null}>
                         <FontAwesomeIcon icon={['fa', 'sliders-h']} className="icon settings" />  
                     </ListItemIcon>
-                    <ListItemText primary='Settings' style={ settings.currentPage==='Settings'? {color:'rgb(52,183,166)'} : null} />
+                    <ListItemText primary={ textData.settings[language]} style={ settings.currentPage==='Settings'? {color:'rgb(52,183,166)'} : null} />
                 </ListItem>
             </List>
 
@@ -74,7 +76,7 @@ const DrawerMenu = props => {
                         <ListItemIcon key='Github'>
                             <FontAwesomeIcon icon={['fab', 'github']} className="icon github"/>  
                             </ListItemIcon>
-                        <ListItemText primary='Github page' />
+                        <ListItemText primary={textData.github[language]} />
                     </ListItem>
                 </Link>
             </List>

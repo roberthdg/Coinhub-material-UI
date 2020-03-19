@@ -11,6 +11,8 @@ import { Typography } from '@material-ui/core';
 const Settings = props => {
 
     const [settings, setSettings] = useContext(settingsContext)
+    let language = settings.language;
+    let textData = settings.languageData.settings;
 
     function changeSettings(event, type) {
         settings[type]=event.target.value;
@@ -23,10 +25,10 @@ const Settings = props => {
         <Grid container spacing={3}>
             <Grid item xs={12} md={4} lg={3}>
                 <Paper className={props.classes.paper}>
-                    <Typography>Currency</Typography><br />
+                    <Typography>{textData.currency.label[language]}</Typography><br />
                     <FormControl component="fieldset">
-                        <RadioGroup aria-label="Currency selector" name="currency" value={settings.currency} onChange={(e) => changeSettings(e, 'currency')}>
-                            <FormControlLabel value="USD" control={<Radio style={ settings.currency==='USD'? {color:'rgb(52,183,166)'} : null } />} label="US Dollar" />
+                        <RadioGroup aria-label={textData.currency.label[language]} name="currency" value={settings.currency} onChange={(e) => changeSettings(e, 'currency')}>
+                            <FormControlLabel value="USD" control={<Radio style={ settings.currency==='USD'? {color:'rgb(52,183,166)'} : null } />} label={textData.currency.options.dollar[language]} />
                             <FormControlLabel value="EUR" control={<Radio style={ settings.currency==='EUR'? {color:'rgb(52,183,166)'} : null } />} label="Euro" />
                         </RadioGroup>
                     </FormControl>
@@ -34,7 +36,7 @@ const Settings = props => {
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
                 <Paper className={props.classes.paper}>
-                    <Typography>Language</Typography><br />
+                    <Typography>{textData.language.label[language]}</Typography><br />
                     <FormControl component="fieldset">
                         <RadioGroup aria-label="Language selector" name="language" value={settings.language} onChange={(e) => changeSettings(e, 'language')}>
                             <FormControlLabel value="ENG" control={<Radio style={ settings.language==='ENG'? {color:'rgb(52,183,166)'} : null }/>} label="English" />
@@ -46,11 +48,11 @@ const Settings = props => {
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
                 <Paper className={props.classes.paper}>
-                <Typography>Theme</Typography><br />
+                <Typography>{textData.theme.label[language]}</Typography><br />
                     <FormControl component="fieldset">
                         <RadioGroup aria-label="Theme selector" name="theme" value={settings.theme} onChange={(e) => changeSettings(e, 'theme')}>
-                            <FormControlLabel value="Light" control={<Radio style={ settings.theme==='Light'? {color:'rgb(52,183,166)'} : null }/>} label="Light" />
-                            <FormControlLabel value="Dark" control={<Radio style={ settings.theme==='Dark'? {color:'rgb(52,183,166)'} : null }/>} label="Dark" />
+                            <FormControlLabel value="Light" control={<Radio style={ settings.theme==='Light'? {color:'rgb(52,183,166)'} : null }/>} label={textData.theme.options.light[language]} />
+                            <FormControlLabel value="Dark" control={<Radio style={ settings.theme==='Dark'? {color:'rgb(52,183,166)'} : null }/>} label={textData.theme.options.dark[language]} />
                         </RadioGroup>
                     </FormControl>
                 </Paper>

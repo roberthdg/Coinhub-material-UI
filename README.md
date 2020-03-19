@@ -16,7 +16,7 @@ $ npm start
 Project created with:
 * React
 * Material-UI
-* Recharts V2.0
+* Recharts
 * CryptoCompare API
 * Cambio.today API
 * Express.js

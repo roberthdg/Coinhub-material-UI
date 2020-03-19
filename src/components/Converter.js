@@ -6,12 +6,16 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const Converter = (props) => {
 
   const [data, setData] = useState([])
   const [isLoaded, setIsLoaded] = useState(false)
   const [settings] = useContext(settingsContext)
+  const language = settings.language
+  const textData = settings.languageData.converter
+
   //Using a proxy to bypass the API's CORS policy restriction
   const proxyurl = "https://cors-anywhere.herokuapp.com/";
   const url = `https://api.cambio.today/v1/full/${settings.currency}/json?key=${process.env.REACT_APP_EXCHANGES_API_KEY}`
@@ -41,16 +45,16 @@ const Converter = (props) => {
 
   return (    
   <>
-    <Typography component="h2" variant="h6" style={{color:'rgb(52,183,166)'}} gutterBottom> Convert to your local currency </Typography>
+    <Typography component="h2" variant="h6" style={{color:'rgb(52,183,166)'}} gutterBottom> {textData.label[language]}</Typography>
     <Table size="small">
       <TableHead>
         <TableRow>
-          <TableCell>Currency</TableCell>
-          <TableCell align="right">Total amount</TableCell>
+          <TableCell>{textData.currency[language]}</TableCell>
+          <TableCell align="right">{textData.total[language]}</TableCell>
         </TableRow>
       </TableHead>
-      <TableBody>
-        {isLoaded? renderRows() : null }
+      <TableBody style={{textAlign:'center'}}>
+        {isLoaded? renderRows() : <CircularProgress style={{color:'rgb(52,183,166)', marginLeft:'20vw', marginTop: '10vh', marginBottom:'50px'}} size='80px'/> }
       </TableBody>
     </Table>
   </>
