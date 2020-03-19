@@ -18,10 +18,10 @@ const PriceInfo = props => {
         ${props.currentPrice}
       </Typography> <br/> <br/>
       <Typography color="textSecondary" className={classes.depositContext}>
-        24-hour high: <strong>$7881{props.currentPrice.high}</strong>
+        24-hour high: <strong>${props.currentPrice.high}</strong>
       </Typography> 
       <Typography color="textSecondary" className={classes.depositContext}>
-        24-hour low: <strong>$5453{props.currentPrice.low}</strong>
+        24-hour low: <strong>${props.currentPrice.low}</strong>
       </Typography>
     </>
   );

@@ -34,7 +34,7 @@ const Converter = (props) => {
     return currencies.map((row,i) => (
       <TableRow key={i}>
         <TableCell>{row.to}</TableCell>
-        <TableCell align="right">{row.rate*props.currentPrice}</TableCell>
+        <TableCell align="right">{(row.rate*props.currentPrice).toFixed(2)}</TableCell>
       </TableRow>
     ))
   }

@@ -69,7 +69,7 @@ const DrawerMenu = props => {
 
             <Divider />
             <List>
-                <Link href="#" color='inherit'>
+                <Link href="https://github.com/roberthdg/Coinhub-material-UI" color='inherit'>
                     <ListItem button key='Github'>
                         <ListItemIcon key='Github'>
                             <FontAwesomeIcon icon={['fab', 'github']} className="icon github"/>  
