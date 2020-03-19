@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { settingsContext } from '../context/settingsContext'
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Content from './Content';
 import DrawerMenu from './Drawer';
 import Appbar from './Appbar'
 import { useStyles } from '../styles/drawerStyle'
 import Settings from './Settings';
+import Dashboard from './Dashboard';
 
 const Main = () => {
   const classes = useStyles();
@@ -20,9 +20,9 @@ const Main = () => {
       <Appbar classes={classes} handleDrawerOpen={handleDrawerOpen} open={open}/>
       <DrawerMenu classes={classes} handleDrawerClose={handleDrawerClose} open={open}/>
 
-      { settings.currentPage==='Bitcoin' ? <Content key='BTC' coin='BTC' classes={classes}/> : null }
-      { settings.currentPage==='Ethereum' ? <Content key='ETH' coin='ETH' classes={classes}/> : null }
-      { settings.currentPage==='Monero' ? <Content key='XMR' coin='XMR' classes={classes}/> : null }
+      { settings.currentPage==='Bitcoin' ? <Dashboard key='BTC' coin='BTC'  classes={classes}/> : null }
+      { settings.currentPage==='Ethereum' ? <Dashboard key='ETH' coin='ETH' classes={classes}/> : null }
+      { settings.currentPage==='Monero' ? <Dashboard key='XMR' coin='XMR'  classes={classes}/> : null }
       { settings.currentPage==='Settings' ? <Settings classes={classes}/> : null }
 
     </div>

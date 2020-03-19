@@ -8,7 +8,7 @@ export const useStyles = makeStyles(theme => ({
   },
   appBar: {
     color: 'inherit',
-    backgroundColor: 'inherit',
+    opacity: 1,
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,

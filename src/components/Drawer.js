@@ -45,14 +45,14 @@ const DrawerMenu = props => {
             <List>
                 {['Bitcoin', 'Ethereum', 'Monero'].map((text, index) => (
                     <ListItem button key={text} onClick={() => setCurrentPage(text)}>
-                        <ListItemIcon key={text}>
+                        <ListItemIcon key={text} style={ settings.currentPage===text? {color:'rgb(52,183,166)'} : null}>
                             {index === 0 
-                            ? <FontAwesomeIcon icon={['fab', 'btc']} style={{fontSize: '22px'}}/> 
+                            ? <FontAwesomeIcon icon={['fab', 'btc']} className="icon btc"/> 
                             : index === 1 
-                            ? <FontAwesomeIcon icon={['fab', 'ethereum']} style={{fontSize: '25px'}}/> 
-                            : <FontAwesomeIcon icon={['fab', 'monero']} style={{fontSize: '20px'}}/>}
+                            ? <FontAwesomeIcon icon={['fab', 'ethereum']} className="icon eth"/> 
+                            : <FontAwesomeIcon icon={['fab', 'monero']} className="icon xmr"/>}
                         </ListItemIcon>
-                        <ListItemText primary={text} />
+                        <ListItemText primary={text} style={ settings.currentPage===text? {color:'rgb(52,183,166)'} : null} />
                     </ListItem>
                 ))}
             </List>
@@ -60,10 +60,10 @@ const DrawerMenu = props => {
             <Divider />
             <List>
                 <ListItem button key='Settings' onClick={() => setCurrentPage('Settings')}>
-                    <ListItemIcon key='Settings'>
-                        <FontAwesomeIcon icon={['fa', 'sliders-h']} style={{fontSize: '20px'}}/>  
+                    <ListItemIcon key='Settings' style={ settings.currentPage==='Settings'? {color:'rgb(52,183,166)'} : null}>
+                        <FontAwesomeIcon icon={['fa', 'sliders-h']} className="icon settings" />  
                     </ListItemIcon>
-                    <ListItemText primary='Settings' />
+                    <ListItemText primary='Settings' style={ settings.currentPage==='Settings'? {color:'rgb(52,183,166)'} : null} />
                 </ListItem>
             </List>
 
@@ -72,7 +72,7 @@ const DrawerMenu = props => {
                 <Link href="#" color='inherit'>
                     <ListItem button key='Github'>
                         <ListItemIcon key='Github'>
-                            <FontAwesomeIcon icon={['fab', 'github']} style={{fontSize: '22px'}}/>  
+                            <FontAwesomeIcon icon={['fab', 'github']} className="icon github"/>  
                             </ListItemIcon>
                         <ListItemText primary='Github page' />
                     </ListItem>

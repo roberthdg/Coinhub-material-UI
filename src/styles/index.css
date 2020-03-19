@@ -9,3 +9,29 @@ body {
   height: 40px;
   padding-right: 10px;
 }
+
+/* btc: 22, eth: 25, xmr: 20, settings: 20, github: 22  */
+
+.icon {
+  margin-left: 5px;
+}
+
+.btc {
+  font-size: 22px;
+}
+
+.eth {
+  font-size: 25px;
+}
+
+.xmr {
+  font-size: 20px;
+}
+
+.settings {
+  font-size: 20px;
+}
+
+.github {
+  font-size: 22px;
+}

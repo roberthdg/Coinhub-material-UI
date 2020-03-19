@@ -8,17 +8,23 @@ const useStyles = makeStyles({
   },
 });
 
-export default function PriceInfo() {
+const PriceInfo = props => {
   const classes = useStyles();
+
   return (
     <>
-      <Typography component="h2" variant="h6" style={{color:'rgb(52,183,166)'}} gutterBottom> Recent price </Typography>
+      <Typography component="h2" variant="h6" style={{color:'rgb(52,183,166)'}} gutterBottom> Current price </Typography>
       <Typography component="p" variant="h4">
-        $3,024.00
-      </Typography>
+        ${props.currentPrice}
+      </Typography> <br/> <br/>
       <Typography color="textSecondary" className={classes.depositContext}>
-        on 15 March, 2019
+        24-hour high: <strong>$7881{props.currentPrice.high}</strong>
+      </Typography> 
+      <Typography color="textSecondary" className={classes.depositContext}>
+        24-hour low: <strong>$5453{props.currentPrice.low}</strong>
       </Typography>
     </>
   );
 }
+
+export default PriceInfo

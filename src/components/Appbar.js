@@ -1,18 +1,24 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import clsx from 'clsx';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { settingsContext }  from '../context/settingsContext'
 
 export default function Appbar(props) {
+
+    const [settings] = useContext(settingsContext);
+
     return(
       <AppBar
       position="fixed"
       className={clsx(props.classes.appBar, {
         [props.classes.appBarShift]: props.open,
-      })}>
+      })}
+      style={settings.theme==='Light'? {background: 'rgb(250,250,250)'} : {background: 'rgb(48,48,48)'} }
+      >
         <Toolbar>
           <IconButton
             aria-label="open drawer"

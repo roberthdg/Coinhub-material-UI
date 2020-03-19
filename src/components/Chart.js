@@ -3,32 +3,17 @@ import { useTheme } from '@material-ui/core/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Typography from '@material-ui/core/Typography';
 
-// Generate Sales Data
-function createData(time, amount) {
-  return { time, amount };
-}
+export default function Chart(props) {
 
-
-//map fetch data
-const data = [
-  createData('', 5),
-  createData('', 40),
-  createData('', 2),
-  createData('', 3),
-  createData('', 4),
-  createData('', 6),
-  createData('', 9),
-];
-
-export default function Chart() {
   const theme = useTheme();
+  const chartData = props.data.map(price => ({time: '', amount: price.close}))
 
   return (
     <>
       <Typography component="h2" variant="h6" style={{color:'rgb(52,183,166)'}} gutterBottom> This week </Typography>
       <ResponsiveContainer>
         <LineChart
-          data={data}
+          data={chartData}
           margin={{
             top: 16,
             right: 16,
