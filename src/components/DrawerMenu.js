@@ -15,8 +15,8 @@ import Link from '@material-ui/core/Link';
 const DrawerMenu = props => {  
 
     const [settings, setSettings] = useContext(settingsContext);
-    let textData = settings.languageData.drawer;
-    let language = settings.language
+    const textData = settings.languageData.drawer;
+    const language = settings.language
 
     function setCurrentPage(page) {
         settings.currentPage=page;

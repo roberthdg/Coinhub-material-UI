@@ -17,12 +17,14 @@ const PriceInfo = props => {
 
   return (
     <>
-      <Typography component="h2" variant="h6" style={{color:'rgb(52,183,166)'}} gutterBottom> {textData.label[language]} </Typography>
+      <Typography component="h2" variant="h6" style={{color:'rgb(52,183,166)'}} gutterBottom> 
+        {textData.label[language]} 
+      </Typography>
       <Typography component="p" variant="h4">
-      {settings.currency==='USD' ? '$' : '€' }{props.currentPrice.close}
+        {settings.currency==='USD' ? '$' : '€' }{props.currentPrice.close}
       </Typography> <br/> <br/>
       <Typography color="textSecondary" className={classes.depositContext}>
-        {textData.high[language]} <strong> {settings.currency==='USD' ? '$' : '€' } {props.currentPrice.high}</strong>
+        {textData.high[language]} <strong> {settings.currency==='USD' ? '$' : '€' }{props.currentPrice.high}</strong>
       </Typography> 
       <Typography color="textSecondary" className={classes.depositContext}>
         {textData.low[language]} <strong>{settings.currency==='USD' ? '$' : '€' }{props.currentPrice.low}</strong>

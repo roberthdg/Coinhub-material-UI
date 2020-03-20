@@ -9,10 +9,9 @@ import Paper from '@material-ui/core/Paper';
 import { Typography } from '@material-ui/core';
 
 const Settings = props => {
-
     const [settings, setSettings] = useContext(settingsContext)
-    let language = settings.language;
-    let textData = settings.languageData.settings;
+    const language = settings.language;
+    const textData = settings.languageData.settings;
 
     function changeSettings(event, type) {
         settings[type]=event.target.value;

@@ -10,41 +10,51 @@ import Converter from './Converter';
 
 const Dashboard = props => {
   const [settings] = useContext(settingsContext)
-  const fixedHeightPaper = clsx(props.classes.paper, props.classes.fixedHeight);
   const [isLoaded, setIsLoaded] = useState(false)
-  const [data, setData] = useState([])
+  const [coinData, setCoinData] = useState([])
+  const [exchangesData, setExchangesData] = useState([])
+  const fixedHeightPaper = clsx(props.classes.paper, props.classes.fixedHeight);
   
   useEffect(() => {
+    //Fetching crytocurrency prices data
     fetch(`https://min-api.cryptocompare.com/data/v2/histoday?fsym=${props.coin}&tsym=${settings.currency}&limit=7&api_key=${process.env.REACT_APP_API_KEY}`)
-      .then(res => res.json())
-      .then(data => {
-        setData(data.Data.Data); 
-        setIsLoaded(true);
-      })
-      .catch(error => setIsLoaded(false))  
-  }, [props.coin, settings.currency, setIsLoaded])
+    .then(res => res.json())
+    .then(data => {
+      setCoinData(data.Data.Data); 
+      setIsLoaded(true);
+    })
+    .catch(error => setIsLoaded(false))
 
-  // useEffect(() => {
-  //   setData([9100, 8800, 8760, 6000, 5400, 4893, 5200, 8760, 6000, 7502.56])
-  //   setIsLoaded(true)
-  // }, [])
+    //Using a proxy to bypass the API's CORS policy restriction
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    const url = `https://api.cambio.today/v1/full/${settings.currency}/json?key=${process.env.REACT_APP_EXCHANGES_API_KEY}`
+    
+    //Fetching currencies exchange rates
+    fetch(proxyurl+url)
+    .then(res => res.json())
+    .then(data => {
+      setExchangesData(data.result.conversion); 
+    })
+    .catch(error => {setIsLoaded(false)})  
+
+  }, [props.coin, settings.currency, setIsLoaded])
 
   function renderDashboard() {
     return(
       <Grid container spacing={3}>
         <Grid item xs={12} md={8} lg={9}>
           <Paper className={fixedHeightPaper}>
-            <Chart data={data}/>
+            <Chart data={coinData}/>
           </Paper>
         </Grid>
         <Grid item xs={12} md={4} lg={3}>
           <Paper className={fixedHeightPaper}>
-            <PriceInfo currentPrice={data[data.length-1]} />
+            <PriceInfo currentPrice={coinData[coinData.length-1]} />
           </Paper>
         </Grid>
         <Grid item xs={12}>
           <Paper className={props.classes.paper}>
-            <Converter currentPrice={data[data.length-1].close} />
+            <Converter currentPrice={coinData[coinData.length-1].close} exchangesData={exchangesData}/>
           </Paper>
         </Grid>
       </Grid>

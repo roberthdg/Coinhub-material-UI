@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { settingsContext } from '../context/settingsContext'
 import CssBaseline from '@material-ui/core/CssBaseline';
-import DrawerMenu from './Drawer';
+import DrawerMenu from './DrawerMenu';
 import Appbar from './Appbar'
 import { useStyles } from '../styles/drawerStyle'
 import Settings from './Settings';
