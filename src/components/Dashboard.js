@@ -7,13 +7,16 @@ import Paper from '@material-ui/core/Paper';
 import Chart from './Chart';
 import PriceInfo from './PriceInfo';
 import Converter from './Converter';
+import { Alert } from '@material-ui/lab';
 
 const Dashboard = props => {
   const [settings] = useContext(settingsContext)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [displayAlert, setDisplayAlert] = useState(false)
   const [coinData, setCoinData] = useState([])
   const [exchangesData, setExchangesData] = useState([])
   const fixedHeightPaper = clsx(props.classes.paper, props.classes.fixedHeight);
+  const failedConnectionAlert =  <Alert severity="warning" variant="outlined">{settings.languageData.alert[settings.language]}</Alert>
   
   useEffect(() => {
     //Fetching crytocurrency prices data
@@ -23,8 +26,8 @@ const Dashboard = props => {
       setCoinData(data.Data.Data); 
       setIsLoaded(true);
     })
-    .catch(error => setIsLoaded(false))
-
+    .catch(error => {setIsLoaded(false); setDisplayAlert(true)})
+    
     //Using a proxy to bypass the API's CORS policy restriction
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const url = `https://api.cambio.today/v1/full/${settings.currency}/json?key=${process.env.REACT_APP_EXCHANGES_API_KEY}`
@@ -32,12 +35,9 @@ const Dashboard = props => {
     //Fetching currencies exchange rates
     fetch(proxyurl+url)
     .then(res => res.json())
-    .then(data => {
-      setExchangesData(data.result.conversion); 
-    })
-    .catch(error => {setIsLoaded(false)})  
-
-  }, [props.coin, settings.currency, setIsLoaded])
+    .then(data => setExchangesData(data.result.conversion))
+    .catch(error => setDisplayAlert(true))  
+  }, [props.coin, settings])
 
   function renderDashboard() {
     return(
@@ -64,7 +64,9 @@ const Dashboard = props => {
   return (
     <main className={props.classes.content}>
       <div className={props.classes.toolbar} />
-      { isLoaded ? renderDashboard() : <CircularProgress style={{color:'rgb(52,183,166)', marginLeft:'20vw', marginTop: '10vh'}} size='80px'/>}
+      {displayAlert? failedConnectionAlert : isLoaded 
+      ? renderDashboard() 
+      : <CircularProgress style={{color:'rgb(52,183,166)', marginLeft:'20vw', marginTop: '10vh'}} size='80px'/>}
     </main>
   );
 }

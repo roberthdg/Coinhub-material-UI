@@ -2,7 +2,7 @@ export const languageData = {
     drawer: {
         settings: {
             'ENG': 'Settings',
-            'ESP': 'Configuracion',
+            'ESP': 'Configuración',
             'POR': 'Configuração'
         },
         github: {
@@ -30,7 +30,7 @@ export const languageData = {
             label: {
                 'ENG': 'Language',
                 'ESP': `Idioma`,
-                'POR': 'Idioma'
+                'POR': 'Linguagem'
             }
         },
         theme: {
@@ -93,6 +93,10 @@ export const languageData = {
             'ESP': `Valor total`,
             'POR': 'Valor total'
         }
+    },
+    alert: {
+        'ENG': 'Connection failed - try again later',
+        'ESP': `Falla en la conexión - intente nuevamente más tarde`,
+        'POR': 'Falha na conexão - tente novamente mais tarde'
     }
-
 }

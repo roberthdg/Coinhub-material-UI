@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { settingsContext } from '../context/settingsContext'
 import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
@@ -30,32 +30,35 @@ const Converter = (props) => {
   }
 
   return (    
-  <>
-    <Typography component="h2" variant="h6" style={{color:'rgb(52,183,166)'}} gutterBottom> 
-      {textData.label[language]}
-    </Typography>
-    <TextField
+    <>
+      <Typography component="h2" variant="h6" style={{color:'rgb(52,183,166)'}} gutterBottom> 
+        {textData.label[language]}
+      </Typography>
+      <div style={{marginBottom:'15px', marginTop: '15px', marginLeft:'15px'}}>
+        <TextField
           id="filled-number"
           value={amount}
           label={settings.currentPage}
-          type="number"
+          type="number"  
           variant="outlined"
           onChange={ e => (setAmount(e.target.value))}
         />
-    <Table size="small" style={{overflowX: 'scroll'}}>
-      <TableHead>
-        <TableRow>
-          <TableCell>{textData.currency[language]}</TableCell>
-          <TableCell align="right">{textData.total[language]}</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody style={{textAlign:'center'}}>
-        {props.exchangesData.length>0? renderRows(amount) : <CircularProgress style={{color:'rgb(52,183,166)', marginLeft:'20vw', marginTop: '10vh', marginBottom:'50px'}} size='80px'/> }
-      </TableBody>
-    </Table>
-  </>
+      </div>
+      {props.exchangesData.length>0  
+      ? <Table size="small" style={{overflowX: 'scroll'}}>
+          <TableHead>
+            <TableRow>
+              <TableCell>{textData.currency[language]}</TableCell>
+              <TableCell align="right">{textData.total[language]}</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody style={{textAlign:'center'}}>
+            {renderRows(amount)}
+          </TableBody>
+        </Table>
+      : <CircularProgress style={{color:'rgb(52,183,166)', marginLeft:'20vw', marginTop: '10vh', marginBottom:'50px'}} size='80px'/> }
+    </>
   )
-  
 }
 
 export default Converter

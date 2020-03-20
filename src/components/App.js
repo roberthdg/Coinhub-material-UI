@@ -3,10 +3,10 @@ import { settingsContext } from '../context/settingsContext'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faBtc, faEthereum, faGithub, faMonero } from '@fortawesome/free-brands-svg-icons'
-import { faCalculator, faSlidersH } from '@fortawesome/free-solid-svg-icons'
+import { faSlidersH } from '@fortawesome/free-solid-svg-icons'
 import Main from './Main';
 
-library.add( faBtc, faEthereum, faGithub, faCalculator, faSlidersH, faMonero )
+library.add( faBtc, faEthereum, faGithub, faSlidersH, faMonero )
 
 const lightTheme = createMuiTheme();
 
