@@ -28,16 +28,14 @@ const Dashboard = props => {
     })
     .catch(error => {setIsLoaded(false); setDisplayAlert(true)})
     
-    //Using a proxy to bypass the API's CORS policy restriction
-    const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    const url = `https://api.cambio.today/v1/full/${settings.currency}/json?key=${process.env.REACT_APP_EXCHANGES_API_KEY}`
-    
     //Fetching currencies exchange rates
-    fetch(proxyurl+url)
+    const url = `https://api.currencyapi.com/v3/latest?apikey=${process.env.REACT_APP_EXCHANGES_API_KEY}`
+    fetch(url)
     .then(res => res.json())
-    .then(data => setExchangesData(data.result.conversion))
+    .then(data => {setExchangesData(data.data)})
     .catch(error => setDisplayAlert(true))  
-  }, [props.coin, settings])
+
+  }, [props.coin, settings.currency])
 
   function renderDashboard() {
     return(

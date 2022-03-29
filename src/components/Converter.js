@@ -18,13 +18,15 @@ const Converter = (props) => {
 
   function renderRows(amount) {
     //filter relevant currencies from fetched data
-    const currencyList = ['ARS', 'BRL', 'COP', 'CLP', 'UYU']
-    let currencies = props.exchangesData.filter(item => currencyList.includes(item.to))
+    const currencyList = ['USD','EUR','ARS','BRL','COP','CLP','UYU']
 
-    return currencies.map((row,i) => (
+    //set current price to base USD (API exchanges limitations)
+    let currentPrice = props.currentPrice/props.exchangesData[settings.currency]?.value
+
+    return currencyList.map((row,i) => (
       <TableRow key={i}>
-        <TableCell>{row.to}</TableCell>
-        <TableCell align="right">{(row.rate*props.currentPrice*amount).toFixed(2)}</TableCell>
+        <TableCell>{props.exchangesData[row]?.code}</TableCell>
+        <TableCell align="right">{(props.exchangesData[row]?.value*currentPrice*amount).toFixed(2)}</TableCell>
       </TableRow>
     ))
   }
@@ -44,7 +46,7 @@ const Converter = (props) => {
           onChange={ e => (setAmount(e.target.value))}
         />
       </div>
-      {props.exchangesData.length>0  
+      {props.exchangesData 
       ? <Table size="small" style={{overflowX: 'scroll'}}>
           <TableHead>
             <TableRow>
